@@ -1,0 +1,134 @@
+## Core Idea
+
+Binary search works whenever the answer space has a monotonic structure. You keep a left and right boundary, inspect the middle, and discard the half that can no longer contain the answer.
+
+## When To Reach For It
+
+- The input is sorted, or can be interpreted as sorted by some condition.
+- You need the first valid index, last valid index, lower bound, or upper bound.
+- The problem can be reframed as "find the smallest value that satisfies a predicate."
+
+## Template
+
+<CodeTabs
+  snippets={[
+    {
+      label: "C",
+      language: "c",
+      code: `int binarySearch(int* nums, int numsSize, int target) {
+  int left = 0;
+  int right = numsSize - 1;
+
+  while (left <= right) {
+    int mid = left + (right - left) / 2;
+
+    if (nums[mid] == target) return mid;
+    if (nums[mid] < target) left = mid + 1;
+    else right = mid - 1;
+  }
+
+  return -1;
+}`,
+    },
+    {
+      label: "C++",
+      language: "cpp",
+      code: `int binarySearch(const vector<int>& nums, int target) {
+  int left = 0;
+  int right = static_cast<int>(nums.size()) - 1;
+
+  while (left <= right) {
+    int mid = left + (right - left) / 2;
+
+    if (nums[mid] == target) return mid;
+    if (nums[mid] < target) left = mid + 1;
+    else right = mid - 1;
+  }
+
+  return -1;
+}`,
+    },
+    {
+      label: "Go",
+      language: "go",
+      code: `func binarySearch(nums []int, target int) int {
+  left, right := 0, len(nums)-1
+
+  for left <= right {
+    mid := left + (right-left)/2
+
+    if nums[mid] == target {
+      return mid
+    }
+    if nums[mid] < target {
+      left = mid + 1
+    } else {
+      right = mid - 1
+    }
+  }
+
+  return -1
+}`,
+    },
+    {
+      label: "Java",
+      language: "java",
+      code: `int binarySearch(int[] nums, int target) {
+  int left = 0;
+  int right = nums.length - 1;
+
+  while (left <= right) {
+    int mid = left + (right - left) / 2;
+
+    if (nums[mid] == target) return mid;
+    if (nums[mid] < target) left = mid + 1;
+    else right = mid - 1;
+  }
+
+  return -1;
+}`,
+    },
+    {
+      label: "JavaScript",
+      language: "javascript",
+      code: `function binarySearch(nums, target) {
+  let left = 0;
+  let right = nums.length - 1;
+
+  while (left <= right) {
+    const mid = Math.floor((left + right) / 2);
+
+    if (nums[mid] === target) return mid;
+    if (nums[mid] < target) left = mid + 1;
+    else right = mid - 1;
+  }
+
+  return -1;
+}`,
+    },
+    {
+      label: "Python",
+      language: "python",
+      code: `def binary_search(nums, target):
+    left, right = 0, len(nums) - 1
+
+    while left <= right:
+        mid = left + (right - left) // 2
+
+        if nums[mid] == target:
+            return mid
+        if nums[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+
+    return -1`,
+    },
+  ]}
+/>
+
+## What To Watch
+
+- Decide early whether your interval is closed `[left, right]` or half-open `[left, right)`.
+- For "first true" style problems, keep the condition and boundary updates perfectly symmetric.
+- Off-by-one mistakes usually come from mixing interval conventions.
