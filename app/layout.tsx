@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "KO Code",
-  description: "The best code guidance for learning algorithms.",
+  description: "Focused code guidance and implementation notes.",
 };
 
 export default function RootLayout({
